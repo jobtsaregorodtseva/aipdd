@@ -1,0 +1,8 @@
+// app/login/layout.js
+// Запрещаем статичную пре-генерацию: страница входа работает
+// только в рантайме, когда доступны переменные Supabase.
+export const dynamic = 'force-dynamic';
+
+export default function LoginLayout({ children }) {
+  return children;
+}
