@@ -1,0 +1,167 @@
+/* ===========================================================
+   ПДД AI — дизайн-система
+   Направление: спокойная уверенность. Продукт для тех, кто
+   готовится (часто пересдаёт) к экзамену и нервничает.
+   Интерфейс снимает тревогу: воздух, мягкие формы, тёплый
+   синий доверия — не казённый «гибддшный», а живой.
+   =========================================================== */
+
+:root {
+  /* --- Палитра --- */
+  --blue:        #1565D8;   /* основной акцент — доверие, действие */
+  --blue-deep:   #0C3F86;   /* заголовки, нажатые состояния */
+  --blue-soft:   #EAF2FF;   /* подложки, выделения */
+  --blue-line:   #CFE0FA;   /* границы на синих карточках */
+
+  --ink:         #16202E;   /* основной текст — почти чёрный с синевой */
+  --ink-soft:    #5A6675;   /* вторичный текст */
+  --ink-faint:   #93A0AF;   /* подписи, плейсхолдеры */
+
+  --bg:          #FBFCFE;   /* фон страницы — чуть тёплый белый */
+  --surface:     #FFFFFF;   /* карточки */
+  --line:        #E7ECF3;   /* разделители */
+
+  --ok:          #1E9E62;   /* верно */
+  --ok-soft:     #E6F6EE;
+  --warn:        #C2410C;   /* ловушка, внимание */
+  --warn-soft:   #FFF1E8;
+  --gold:        #E8A317;   /* достижения, прогресс */
+
+  /* --- Типографика --- */
+  --font-display: 'Manrope', -apple-system, 'Segoe UI', sans-serif;
+  --font-body: 'Inter', -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+  /* --- Радиусы и тени --- */
+  --r-sm: 10px;
+  --r-md: 16px;
+  --r-lg: 24px;
+  --r-pill: 999px;
+  --shadow-sm: 0 1px 2px rgba(16,32,46,.06), 0 1px 1px rgba(16,32,46,.04);
+  --shadow-md: 0 4px 16px rgba(16,32,46,.08);
+  --shadow-blue: 0 6px 20px rgba(21,101,216,.28);
+
+  /* --- Сетка --- */
+  --maxw: 1080px;
+  --gap: 20px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin: 0 0 .5em;
+}
+h1 { font-size: clamp(28px, 5vw, 44px); font-weight: 800; }
+h2 { font-size: clamp(22px, 3.5vw, 30px); font-weight: 800; }
+h3 { font-size: clamp(18px, 2.5vw, 22px); font-weight: 700; }
+
+a { color: var(--blue); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* --- Контейнер --- */
+.container {
+  width: 100%;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* --- Кнопки --- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 16px;
+  padding: 14px 24px;
+  border-radius: var(--r-pill);
+  border: none;
+  cursor: pointer;
+  transition: transform .12s ease, box-shadow .12s ease, background .15s ease;
+  text-decoration: none;
+}
+.btn:active { transform: translateY(1px); }
+.btn-primary {
+  background: var(--blue);
+  color: #fff;
+  box-shadow: var(--shadow-blue);
+}
+.btn-primary:hover { background: var(--blue-deep); text-decoration: none; }
+.btn-ghost {
+  background: var(--surface);
+  color: var(--blue);
+  border: 1.5px solid var(--blue-line);
+}
+.btn-ghost:hover { background: var(--blue-soft); text-decoration: none; }
+.btn-block { width: 100%; }
+.btn:disabled { opacity: .5; cursor: not-allowed; }
+
+/* --- Карточки --- */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+}
+
+/* --- Поля ввода --- */
+.input {
+  width: 100%;
+  font-family: var(--font-body);
+  font-size: 16px;
+  padding: 14px 16px;
+  border: 1.5px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--surface);
+  color: var(--ink);
+  transition: border-color .15s ease;
+}
+.input:focus {
+  outline: none;
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px var(--blue-soft);
+}
+
+/* --- Бейджи --- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: var(--r-pill);
+  background: var(--blue-soft);
+  color: var(--blue-deep);
+}
+
+/* --- Доступность: фокус видимый, движение по желанию --- */
+:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+
+/* --- Утилиты --- */
+.muted { color: var(--ink-soft); }
+.center { text-align: center; }
+.stack > * + * { margin-top: var(--gap); }
